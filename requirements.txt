@@ -1,0 +1,7 @@
+django-oauth-toolkit
+djangorestframework
+drf-spectacular
+requests
+openpyxl
+translators
+python-dotenv
