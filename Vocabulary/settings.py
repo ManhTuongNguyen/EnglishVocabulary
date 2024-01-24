@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'drf_spectacular',
-    'drf_spectacular_sidecar',
     'oauth2_provider',
     'rest_framework',
 
@@ -106,9 +105,6 @@ SPECTACULAR_SETTINGS = {
     'TITLE': 'Vocabulary project',
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
-    'SWAGGER_UI_DIST': 'SIDECAR',  # shorthand to use the sidecar instead
-    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
-    'REDOC_DIST': 'SIDECAR',
 }
 
 # Database
