@@ -9,6 +9,8 @@ db.sqlite3
 media
 test_media
 
+staticfiles
+
 # Backup files #
 *.bak
 

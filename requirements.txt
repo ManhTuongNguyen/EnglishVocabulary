@@ -1,6 +1,7 @@
 django-oauth-toolkit
 djangorestframework
 drf-spectacular
+drf-spectacular[sidecar]
 requests
 openpyxl
 translators
