@@ -1,4 +1,4 @@
-import _thread
+import multiprocessing
 
 from rest_framework import serializers
 
@@ -15,5 +15,6 @@ class EnglishVocabularySerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         instance = super().create(validated_data)
-        _thread.start_new_thread(save_translated_word, (instance.id, instance.word))
+        process = multiprocessing.Process(target=save_translated_word, args=(instance.id, instance.word))
+        process.start()
         return instance
