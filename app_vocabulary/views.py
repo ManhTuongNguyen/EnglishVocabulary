@@ -1,11 +1,13 @@
 from django.http import HttpResponse
-from drf_spectacular.utils import extend_schema
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema, OpenApiResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 
 from app_api_gateway.utils import CustomPagination
+from app_translate.utils import translate, get_pronunciation
 from app_vocabulary.models import EnglishVocabulary
 from app_vocabulary.serializers import EnglishVocabularySerializer
 
@@ -18,8 +20,15 @@ class EnglishVocabularyViewSet(ModelViewSet):
     def get_queryset(self):
         return EnglishVocabulary.objects.filter(user=self.request.user)
 
+    @staticmethod
+    @extend_schema(
+        responses={
+            200: OpenApiTypes.BINARY,
+            401: OpenApiResponse(description='Unauthorized'),
+        }
+    )
     @action(methods=['get'], detail=False, url_path='download-workbook')
-    def get_workbook(self, request):
+    def get_workbook(request):
         # Create a Workbook
         workbook = Workbook()
         worksheet = workbook.active
@@ -53,3 +62,22 @@ class EnglishVocabularyViewSet(ModelViewSet):
         workbook.save(response)
 
         return response
+
+    @staticmethod
+    @extend_schema(
+        request=None,
+        responses=None,
+        description='To update vocabulary if multiprocessing in pythonanywhere does not work properly'
+    )
+    @action(methods=['post'], detail=False, url_path='update-translation')
+    def update_vocabulary(request):
+        queryset = EnglishVocabulary.objects.filter(user=request.user, translation='')
+        for obj in queryset:
+            word = obj.word
+            text_translated = translate(query_text=word)
+            list_pronunciation, list_audio = get_pronunciation(query_text=word)
+            obj.translation = text_translated
+            obj.pronunciation = ', '.join(list_pronunciation)
+            obj.audio = ', '.join(list_audio)
+            obj.save()
+        return HttpResponse({'message': 'Update vocabulary successfully!'})
