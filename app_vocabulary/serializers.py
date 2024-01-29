@@ -14,7 +14,10 @@ class EnglishVocabularySerializer(serializers.ModelSerializer):
         exclude = ['created_at', 'updated_at']
 
     def create(self, validated_data):
+        word = validated_data['word']
+        validated_data['word'] = word.lower().strip()
         instance = super().create(validated_data)
         process = multiprocessing.Process(target=save_translated_word, args=(instance.id, instance.word))
         process.start()
         return instance
+
