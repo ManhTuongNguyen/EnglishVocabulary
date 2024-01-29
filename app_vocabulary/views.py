@@ -4,6 +4,7 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse
 from openpyxl import Workbook
 from openpyxl.styles import Font
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from app_api_gateway.utils import CustomPagination
@@ -80,4 +81,4 @@ class EnglishVocabularyViewSet(ModelViewSet):
             obj.pronunciation = ', '.join(list_pronunciation)
             obj.audio = ', '.join(list_audio)
             obj.save()
-        return HttpResponse({'message': 'Update vocabulary successfully!'})
+        return Response({'message': 'Update vocabulary successfully!'})
