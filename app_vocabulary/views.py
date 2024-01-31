@@ -53,7 +53,7 @@ class EnglishVocabularyViewSet(ModelViewSet):
                 obj[0],
                 obj[1],
                 obj[2],
-                ', '.join(obj[3]),
+                obj[3],
             ]
             worksheet.append(row)
 
