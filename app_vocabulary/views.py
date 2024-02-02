@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.http import HttpResponse
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import extend_schema, OpenApiResponse
@@ -56,10 +58,12 @@ class EnglishVocabularyViewSet(ModelViewSet):
                 obj[3],
             ]
             worksheet.append(row)
+        now = datetime.now()
+        file_name = rf'word_{request.user.username}_{now.strftime("%d/%m%y")}'
 
         # Create an HTTP response with the excel to download
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = f'attachment; filename=word_{request.user.username}.xlsx'
+        response['Content-Disposition'] = f'attachment; filename={file_name}'
         workbook.save(response)
 
         return response
@@ -72,7 +76,7 @@ class EnglishVocabularyViewSet(ModelViewSet):
     )
     @action(methods=['post'], detail=False, url_path='update-translation')
     def update_vocabulary(request):
-        queryset = EnglishVocabulary.objects.filter(user=request.user, translation='')
+        queryset = EnglishVocabulary.objects.filter(user=request.user, translation=None)
         for obj in queryset:
             word = obj.word
             text_translated = translate(query_text=word)
