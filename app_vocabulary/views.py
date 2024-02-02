@@ -59,7 +59,7 @@ class EnglishVocabularyViewSet(ModelViewSet):
             ]
             worksheet.append(row)
         now = datetime.now()
-        file_name = rf'word_{request.user.username}_{now.strftime("%d/%m%y")}'
+        file_name = rf'word_{request.user.username}_{now.strftime("%d/%m/%y")}'
 
         # Create an HTTP response with the excel to download
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
