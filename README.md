@@ -9,6 +9,8 @@ vocabulary while studying or learning new languages. Whether you’re a language
 to expand your word bank, this backend offers a convenient solution for saving and managing words. It’s built using
 Django, incorporates OAuth2 authentication, utilizes the Django Rest Framework (DRF), and integrates with Swagger.
 
+It's currently live and can be accessed [at here](https://mtuongpk123.pythonanywhere.com/api/schema/swagger-ui/).
+
 ## Installation
 
 1. **Prerequisites:**
@@ -27,7 +29,7 @@ Django, incorporates OAuth2 authentication, utilizes the Django Rest Framework (
     ```
 
 4. **Database Setup:**
-    - Configure your database settings in settings.py.
+    - Configure your database settings in `settings.py`.
     - Run migrations:
         ```
         python manage.py makemigrations
