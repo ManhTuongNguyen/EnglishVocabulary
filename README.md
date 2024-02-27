@@ -9,6 +9,8 @@ vocabulary while studying or learning new languages. Whether you’re a language
 to expand your word bank, this backend offers a convenient solution for saving and managing words. It’s built using
 Django, incorporates OAuth2 authentication, utilizes the Django Rest Framework (DRF), and integrates with Swagger.
 
+This project serves as the backend for [this chrome extension](https://github.com/ManhTuongNguyen/ChromeExtension).
+
 It's currently live and can be accessed [at here](https://mtuongpk123.pythonanywhere.com/api/schema/swagger-ui/).
 
 ## Installation
