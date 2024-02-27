@@ -1,4 +1,4 @@
-import time
+import timeit
 
 import requests
 from translators.server import GoogleV2, Bing
@@ -6,10 +6,10 @@ from translators.server import GoogleV2, Bing
 
 def stat_time(func):
     def wrapper(*args, **kwargs):
-        start = time.time()
+        start = timeit.default_timer()
         result = func(*args, **kwargs)
-        end = time.time()
-        print(f'{func.__name__} run time: {end - start}')
+        end = timeit.default_timer()
+        print(f'The execution time of function {func.__name__} was: {end - start}s')
         return result
     return wrapper
 
