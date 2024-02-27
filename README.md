@@ -35,7 +35,7 @@ Django, incorporates OAuth2 authentication, utilizes the Django Rest Framework (
         ```
 5. **OAuth2 Configuration:**
 
-   Set up OAuth2 authentication using django-oauth-toolkit. Refer to the official documentation for detailed
+   Set up `OAuth2` authentication using `django-oauth-toolkit`. Refer to the [official documentation](https://django-oauth-toolkit.readthedocs.io/en/latest/) for detailed
    instructions.
 
 6. **Setting up the `.env` file**
